@@ -1,0 +1,125 @@
+FORMAT: 1A
+// HOST: http://polls.apiblueprint.org/
+
+# Kicknow
+
+With kicknow you're able to find all the great foosball places near you. 
+
+# Data Structures
+
+## GeoCoordinates (object)
++ @context: http://schema.org
++ @type: GeoCoordinates (string)
++ latitude: 40.75 (string)
++ longitude: 73.98 (string)
+
+## PostalAddress (object)
++ @context: http://schema.org
++ @type: PostalAddress
++ addressLocality: Mexico Beach
++ addressRegion: FL
++ streetAddress: 3102 Highway 98
+
+## ImageObject (object)
++ @context: http://schema.org
++ @type: ImageObject
++ author: Jane Doe 
++ contentLocation: `Puerto Vallarta, Mexico`
++ contentUrl: `mexico-beach.jpg` (string)
++ datePublished: `2008-01-25`
++ description: I took this picture while on vacation last year.
++ name: Beach in Mexico
+
+## Place (object)
++ @context: http://schema.org (string)
++ @type: Place (string)
++ address (PostalAddress)
++ geo (GeoCoordinates) - coordinates of the place
++ logo (ImageObject)
++ name: Empire State Building (string)
++ photos (array[ImageObject, ImageObject])
+
+## Brand (object)
++ @context: http://schema.org (string)
++ @type: Brand (string)
++ logo ImageObject
+
+## Product (object)
++ @context: http://schema.org (string)
++ @type: Product (string)
++ brand Brand
++ description
++ name
++ logo (ImageObject)
+
+## FoosballTable (Product)
+
+## FoosballPlace (Place)
++ tables (array[FoosballTable, FoosballTable])
+
+
+# Group Places
+
+## Foosball Places [/places]
+
+### List All Places [POST]
+
+To see a list of nearby places you have to send GeoCoordinates or at least an
+address. 
+
++ Request (application/json)
+    + Attributes (array[GeoCoordinates, PostalAddress])
+        
++ Response 200 (application/json)
+    + Attributes (array[FoosballPlace, FoosballPlace, FoosballPlace])
+
+
+## Fetch potential places [/place/new]
+
+### Get a list of all potential places near you. [POST]
+
+If you like to create a new location just send your geolocation.
+You will then receive a list of potential places in this area.
+
++ Request (application/json)
+    + Attributes (GeoCoordinates) 
+
++ Response 200 (application/json)
+
+        [
+            {
+                "@id": "aljsflwkejf34235fd",
+                "name": "Bar Sowieso"
+            },
+            {
+                "@id": "aljsflwkejf34235fd",
+                "name": "Bar Sowieso"
+            },
+            {
+                "@id": "aljsflwkejf34235fd",
+                "name": "Bar Sowieso"
+            }
+        ]
+
+
+## Create Foosball place [/place]
+
+### Create a New Place [POST]
+
++ Request (application/json)
+
+        {
+            "@id": "qklwejr2k3j",
+            "table_choices": [
+                {
+                    "table": "foo",
+                    "quantity": 2
+                }
+            ]
+        }
+
++ Response 201 (application/json)
+
+        {
+            "@id": "qklwejr2k3j"
+        }
