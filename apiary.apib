@@ -74,6 +74,19 @@ address.
     + Attributes (array[FoosballPlace, FoosballPlace, FoosballPlace])
 
 
+## Foosball Place [/place]
+
+### Get one specific place [POST]
++ Request (application/json)
+
+        { 
+            "place_id" : "alsjdfl32jk3lj234" 
+        }
+    
+    
++ Response 200 (applicaton/json)
+    + Attributes (FoosballPlace)
+
 ## Fetch potential places [/place/new]
 
 ### Get a list of all potential places near you. [POST]
@@ -102,7 +115,7 @@ You will then receive a list of potential places in this area.
         ]
 
 
-## Create Foosball place [/place]
+## Create Foosball place [/place/create]
 
 ### Create a New Place [POST]
 
