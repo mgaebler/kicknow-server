@@ -1,0 +1,26 @@
+test:
+  build: ../../
+  dockerfile: docker/dev/Dockerfile
+  volumes_from:
+    - cache
+  links:
+    - database
+    - document_store
+  environment:
+    MY_TEST_VARIABLE: foo_bar_baz
+    TEST_OUTPUT_DIR: /reports
+
+database:
+  image: mysql:latest
+  hostname: db
+
+document_store:
+  image: elasticsearch:latest
+  hostname: ds
+
+cache:
+  build: ../../
+  dockerfile: docker/dev/Dockerfile
+  volumes:
+    - /tmp/cache:/cache
+  entrypoint: "true"
