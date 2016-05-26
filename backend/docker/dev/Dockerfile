@@ -1,4 +1,4 @@
-FROM mgaebler/kicknow-backend-base
+FROM mgaebler/kicknow-backend-base:lastest
 MAINTAINER Marian Gaebler <marian.gaebler@gmail.com>
 
 # Install dev dependencies
@@ -29,5 +29,5 @@ ENTRYPOINT ["test.sh"]
 CMD ["python", "managed.py", "test", "--noinput"]
 
 # Add application source
-COPY src /application
+COPY django /application
 WORKDIR /application
