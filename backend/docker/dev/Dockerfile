@@ -1,4 +1,4 @@
-FROM mgaebler/kicknow-backend-base:lastest
+FROM mgaebler/kicknow-backend-base:latest
 MAINTAINER Marian Gaebler <marian.gaebler@gmail.com>
 
 # Install dev dependencies
@@ -21,12 +21,14 @@ VOLUME /wheelhouse
 # OUTPUT: Test reports are output here
 VOLUME /reports
 
-# Add test entrypoint script
+# # Add test entrypoint script
 COPY scripts/test.sh /usr/local/bin/test.sh
 RUN chmod +x /usr/local/bin/test.sh
-
+#
 ENTRYPOINT ["test.sh"]
-CMD ["python", "managed.py", "test", "--noinput"]
+# CMD ["/bin/bash"]
+CMD ["./manage.py", "test", "--noinput"]
+
 
 # Add application source
 COPY django /application
