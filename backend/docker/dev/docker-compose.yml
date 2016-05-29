@@ -1,4 +1,4 @@
-test:
+app:
   build: ../../
   dockerfile: docker/dev/Dockerfile
   volumes_from:
@@ -9,6 +9,16 @@ test:
   environment:
     MY_TEST_VARIABLE: foo_bar_baz
     TEST_OUTPUT_DIR: /reports
+
+agent:
+  image: mgaebler/ansible
+  volumes:
+    - ../../ansible/probe.yml:/ansible/site.yml
+  links:
+    - database
+  environment:
+    PROBE_HOST: "db"
+    PROBE_PORT: "3306"
 
 database:
   image: mysql:latest
