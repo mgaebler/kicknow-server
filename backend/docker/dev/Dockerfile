@@ -18,6 +18,9 @@ ENV XDG_CACHE_HOME=/cache
 # OUTPUT: Build artifacts (Wheels) are output here
 VOLUME /wheelhouse
 
+# OUTPUT: Build cache
+VOLUME /build
+
 # OUTPUT: Test reports are output here
 VOLUME /reports
 
