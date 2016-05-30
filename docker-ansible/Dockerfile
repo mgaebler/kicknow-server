@@ -13,7 +13,7 @@ RUN apt-get update -qy \
 
 # Add volume for ansible playbooks
 VOLUME /ansible
-WORKDIR /ansilble
+WORKDIR /ansible
 
 # entrypoint
 ENTRYPOINT ["ansible-playbook"]
