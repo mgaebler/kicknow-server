@@ -33,7 +33,6 @@ With kicknow you're able to find all the great foosball places near you.
 ## Logo (ImageObject) 
 + contentUrl: `http://lorempixel.com/output/city-q-c-64-64-5.jpg`
 
-
 ## Place (object)
 + @context: http://schema.org (string)
 + @id: alsjdfl32jk3lj234 (string)
@@ -53,8 +52,8 @@ With kicknow you're able to find all the great foosball places near you.
 + @context: http://schema.org (string)
 + @type: Product (string)
 + brand Brand
-+ description
-+ name
++ description (string)
++ name (string)
 + logo (Logo)
 
 ## FoosballTable (Product)
@@ -73,21 +72,21 @@ To see a list of nearby places you have to send GeoCoordinates or at least an
 address. 
 
 + Request (application/json)
-    + Attributes (array[GeoCoordinates, PostalAddress])
+    + Attributes (object)
+        + search_string (string)
+        + geo_coordinates (GeoCoordinates)
         
 + Response 200 (application/json)
     + Attributes (array[FoosballPlace, FoosballPlace, FoosballPlace])
 
 
-## Foosball Place [/place]
+## Foosball Place [/place/{id}]
 
-### Get one specific place [POST]
-+ Request (application/json)
+### Get one specific place [GET]
 
-        { 
-            "place_id" : "alsjdfl32jk3lj234" 
-        }
-    
++ Parameters
+    + id (required, string, `alkjsfjf324`) ... The uniqe id of the place
+        
 + Response 200 (application/json)
     + Attributes (FoosballPlace)
 
@@ -103,21 +102,7 @@ You will then receive a list of potential places in this area.
     + Attributes (GeoCoordinates) 
 
 + Response 200 (application/json)
-
-        [
-            {
-                "@id": "aljsflwkejf34235fd",
-                "name": "Bar Sowieso"
-            },
-            {
-                "@id": "aljsflwkejf34235fd",
-                "name": "Bar Sowieso"
-            },
-            {
-                "@id": "aljsflwkejf34235fd",
-                "name": "Bar Sowieso"
-            }
-        ]
+    + Attributes (array[Place, Place, Place, Place])
 
 
 ## Create Foosball place [/place/create]
